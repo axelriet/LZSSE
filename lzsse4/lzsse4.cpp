@@ -476,13 +476,13 @@ LZSSE4_OptimalParseState* LZSSE4_MakeOptimalParseState( size_t bufferSize )
         return nullptr;
     }
 
-    LZSSE4_OptimalParseState* result = reinterpret_cast< LZSSE4_OptimalParseState* >( ::malloc( sizeof( LZSSE4_OptimalParseState ) ) );
+    LZSSE4_OptimalParseState* result = reinterpret_cast< LZSSE4_OptimalParseState* >( malloc( sizeof( LZSSE4_OptimalParseState ) ) );
 
     if ( result != nullptr )
     {
         result->bufferSize = bufferSize;
     
-        result->arrivals = reinterpret_cast< Arrival* >( ::malloc( sizeof( Arrival ) * bufferSize ) );
+        result->arrivals = reinterpret_cast< Arrival* >( malloc( sizeof( Arrival ) * bufferSize ) );
 
         if ( result->arrivals == nullptr )
         {
@@ -498,11 +498,11 @@ LZSSE4_OptimalParseState* LZSSE4_MakeOptimalParseState( size_t bufferSize )
 
 void LZSSE4_FreeOptimalParseState( LZSSE4_OptimalParseState* toFree )
 {
-    ::free( toFree->arrivals );
+    free( toFree->arrivals );
 
     toFree->arrivals = nullptr;
 
-    ::free( toFree );
+    free( toFree );
 }
 
 
