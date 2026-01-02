@@ -103,10 +103,10 @@ LZSSE2_OptimalParseState* LZSSE2_MakeOptimalParseState( size_t bufferSize )
 
     LZSSE2_OptimalParseState* result = reinterpret_cast< LZSSE2_OptimalParseState* >( ::malloc( sizeof( LZSSE2_OptimalParseState ) ) );
 
-    result->bufferSize = bufferSize;
-
     if ( result != nullptr )
     {
+        result->bufferSize = bufferSize;
+
         result->arrivals = reinterpret_cast< Arrival* >( ::malloc( sizeof( Arrival ) * bufferSize ) );
 
         if ( result->arrivals == nullptr )
