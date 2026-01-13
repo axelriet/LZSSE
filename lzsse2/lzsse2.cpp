@@ -297,9 +297,11 @@ size_t LZSSE2_CompressOptimalParse( LZSSE2_OptimalParseState* state, const void*
         
     if ( inputLength < MIN_COMPRESSION_SIZE )
     {
-        memcpy( output, input, inputLength );
+        const size_t length{ std::min(inputLength, outputLength) };
+        
+        memcpy( output, input, length );
 
-        return inputLength;
+        return length;
     }
 
     const uint8_t* inputCursor      = input;

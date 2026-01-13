@@ -647,9 +647,11 @@ size_t LZSSE8_CompressFast( LZSSE8_FastParseState* state, const void* inputChar,
 
     if ( inputLength < MIN_COMPRESSION_SIZE )
     {
-        memcpy( output, input, inputLength );
+        const size_t length{ std::min(inputLength, outputLength) };
+        
+        memcpy( output, input, length );
 
-        return inputLength;
+        return length;
     }
 
     const uint8_t* inputCursor    = input;
