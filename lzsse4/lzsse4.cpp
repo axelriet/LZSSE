@@ -27,6 +27,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdlib.h>
 #include <stdint.h>
 #include <stddef.h>
+#include <algorithm>
 
 #include "lzsse4_platform.h"
 #include "lzsse4.h"
@@ -671,9 +672,11 @@ size_t LZSSE4_CompressOptimalParse( LZSSE4_OptimalParseState* state, const void*
 
     if ( inputLength < MIN_COMPRESSION_SIZE )
     {
-        memcpy( output, input, inputLength );
+        const size_t length{ std::min(inputLength, outputLength) };
+        
+        memcpy( output, input, length );
 
-        return inputLength;
+        return length;
     }
 
     const uint8_t* inputCursor      = input;

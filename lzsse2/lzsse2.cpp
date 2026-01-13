@@ -27,6 +27,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdlib.h>
 #include <stdint.h>
 #include <stddef.h>
+#include <algorithm>
 
 #include "lzsse2_platform.h"
 #include "lzsse2.h"
@@ -582,9 +583,11 @@ size_t LZSSE2_Decompress( const void* inputChar, size_t inputLength, void* outpu
     // Length it not work compressing, just copy initial values
     if ( outputLength == inputLength )
     {
-        memcpy( output, input, outputLength );
+        const size_t length{ std::min(inputLength, outputLength) };
+        
+        memcpy( output, input, length );
 
-        return inputLength;
+        return length;
     }
 
     const uint8_t* inputCursor  = input;
